@@ -1,7 +1,7 @@
 name: Tag
 
 env:
-  NPM_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+  NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   node-version: 18.x
 
 on:

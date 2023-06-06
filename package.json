@@ -2,16 +2,13 @@
   "name": "@micro-lc/compose-toolkit",
   "version": "0.0.0",
   "license": "SEE LICENSE IN LICENSE",
+  "types": "./dist/index.d.ts",
   "packageManager": "yarn@3.6.0",
   "files": [
+    "dist",
     "schemas",
     "package.json"
   ],
-  "exports": {
-    "./schemas": {
-      "types": "./schemas/index.d.ts"
-    }
-  },
   "scripts": {
     "lint": "eslint . --ext .ts,.schema.json --resolve-plugins-relative-to .",
     "test": "echo 'TODO'",

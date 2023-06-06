@@ -27,7 +27,7 @@ jobs:
         id: build-cache
         with:
           path: |
-            ./schemas/index.d.ts
+            ./dist
           key: ${{ runner.os }}-build-${{ github.sha }}
 
       - name: Install dependencies

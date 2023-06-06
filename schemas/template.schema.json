@@ -1,0 +1,46 @@
+{
+  "$id": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/template.schema.json#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#/definitions/localized-text"
+        },
+        "configurator-meta": {
+          "type": "object",
+          "properties": {
+            "sharedPropertiesTypeMap": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "variables": {
+          "title": "Variables",
+          "description": "A set of variables that are used by the current template and whose default value is hinted by the value of the inner field `default`",
+          "type": "object",
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[^\\s]+$": {
+              "type": "object",
+              "properties": {
+                "default": {
+                  "type": "string",
+                  "default": ""
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "template": {
+      "$ref": "https://raw.githubusercontent.com/micro-lc/micro-lc/main/packages/interfaces/schemas/v2/plugin.schema.json#"
+    }
+  }
+}

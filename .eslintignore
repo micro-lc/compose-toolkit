@@ -1,0 +1,15 @@
+.pnp.*
+.yarn/*
+
+dist/
+node_modules/
+playground/
+coverage/
+mocks/
+playwright-report/
+.nyc_output/
+tests/applications/
+tests/applications/
+
+.vscode/
+.idea/

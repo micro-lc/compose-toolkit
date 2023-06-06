@@ -36,12 +36,13 @@ const bannerComment = [
 
 const main = async () => {
   const schemaDirPath = path.resolve(__dirname, '../schemas')
-  const outputDir = path.resolve(__dirname, '../dist')
+  const outputDir = path.resolve(__dirname, '../dist/types')
 
   const inputFilePath = path.resolve(schemaDirPath, 'manifest.schema.json')
-  const outputFilePath = path.resolve(outputDir, 'index.d.ts')
+  const outputFilePath = path.resolve(outputDir, 'manifest.d.ts')
 
   try {
+    const finalBanner = ['/*!', ...banner, '*/', '', ...bannerComment].join('\n')
     const compileProps: Partial<Options> = {
       $refOptions: {
         resolve: {
@@ -58,7 +59,7 @@ const main = async () => {
           },
         },
       },
-      bannerComment: ['/*!', ...banner, '*/', '', ...bannerComment].join('\n'),
+      bannerComment: finalBanner,
       style: { semi: false },
       unreachableDefinitions: true,
     }
@@ -67,6 +68,13 @@ const main = async () => {
 
     await fs.promises.mkdir(outputDir, { recursive: true })
     await fs.promises.writeFile(outputFilePath, compiledTypes, { flag: 'w' })
+
+    const indextds = [
+      finalBanner,
+      'export type * from \'./manifest\'',
+      'export type * from \'./component\'',
+    ].join('\n')
+    await fs.promises.writeFile(path.resolve(outputDir, 'index.d.ts'), indextds, { flag: 'w' })
 
     console.log('\x1b[32m%s\x1b[0m', '✔ Schema compiled successfully')
   } catch (err) {

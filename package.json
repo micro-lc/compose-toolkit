@@ -1,7 +1,7 @@
 {
   "name": "@micro-lc/compose-toolkit",
   "version": "0.1.0-rc1",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "license": "SEE LICENSE IN LICENSE",
   "packageManager": "yarn@3.6.0",
   "files": [
@@ -12,7 +12,9 @@
   "scripts": {
     "lint": "eslint . --ext .ts,.schema.json --resolve-plugins-relative-to .",
     "test": "echo 'TODO'",
-    "build": "ts-node scripts/make-types.ts",
+    "build:types": "tsc --project scripts/tsconfig.types.json",
+    "build:json-types": "ts-node scripts/make-types.ts",
+    "build": "run-s build:types build:json-types",
     "bump": "node scripts/version.mjs",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
@@ -36,6 +38,7 @@
     "json-schema-to-typescript": "^13.0.1",
     "jsonc-eslint-parser": "^2.3.0",
     "node-color-log": "^10.0.2",
+    "npm-run-all": "^4.1.5",
     "pinst": "^3.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.3"

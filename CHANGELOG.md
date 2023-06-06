@@ -8,3 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+### Added
+
+- components manifest JSON schema
+- components interfaces to support static `__manifest`, `__focus_handler`, and `__unfocus_handler`

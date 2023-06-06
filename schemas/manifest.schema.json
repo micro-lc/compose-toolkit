@@ -1,0 +1,96 @@
+{
+  "$id": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/manifest.schema.json#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Manifest",
+  "definitions": {
+    "method": {
+      "title": "Method",
+      "type": "string",
+      "default": "GET",
+      "enum": ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS", "HEAD"]
+    },
+    "url": {
+      "title": "FetchUrl",
+      "type": "object",
+      "properties": {
+        "origin": { "type": "string" },
+        "pathname": { "type": "string" }
+      },
+      "additionalProperties": false,
+      "required": ["pathname"]
+    },
+    "handler": {
+      "title": "ReducedFetchHandler",
+      "type": "object",
+      "instanceOf": "Function",
+      "tsType": "(info: URL, init?: RequestInit | undefined) => Promise<Response>"
+    },
+    "fetch": {
+      "title": "Fetch",
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": { "$ref": "#/definitions/url" },
+          "method": { "$ref": "#/definitions/method" },
+          "notify": { "type": "boolean", "default": false },
+          "handler": { "$ref": "#/definitions/handler" }
+        },
+        "required": ["url"]
+      }
+    },
+    "fetchFactory": {
+      "title": "FetchFactory",
+      "type": "object",
+      "instanceOf": "Function",
+      "tsType": "((context: Record<string, unknown>) => Fetch)"
+    },
+    "storageFactory": {
+      "title": "StorageFactory",
+      "type": "object",
+      "instanceOf": "Function",
+      "tsType": "(context: Record<string, unknown>) => Storage"
+    }
+  },
+  "type": "object",
+  "properties": {
+    "label": {
+      "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#/definitions/localized-text"
+    },
+    "description": {
+      "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#/definitions/localized-text"
+    },
+    "definitions": {
+      "type": "object",
+      "default": {},
+      "additionalProperties": {
+        "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#"
+      }
+    },
+    "docLink": { "type": "string" },
+    "type": {
+      "enum": ["layout", "connector", "adapter"]
+    },
+    "mocks": {
+      "type": "object",
+      "properties": {
+        "fetch": {
+          "$ref": "#/definitions/fetchFactory"
+        },
+        "localStorage": {
+          "$ref": "#/definitions/storageFactory"
+        },
+        "sessionStorage": {
+          "$ref": "#/definitions/storageFactory"
+        }
+      }
+    },
+    "properties": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#"
+      }
+    }
+  }
+}

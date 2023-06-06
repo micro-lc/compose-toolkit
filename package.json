@@ -1,0 +1,45 @@
+{
+  "name": "@micro-lc/compose-toolkit",
+  "version": "0.0.0",
+  "license": "SEE LICENSE IN LICENSE",
+  "packageManager": "yarn@3.6.0",
+  "files": [
+    "schemas",
+    "package.json"
+  ],
+  "exports": {
+    "./schemas": {
+      "types": "./schemas/index.d.ts"
+    }
+  },
+  "scripts": {
+    "lint": "eslint . --ext .ts,.schema.json --resolve-plugins-relative-to .",
+    "test": "echo 'TODO'",
+    "build": "ts-node scripts/make-types.ts",
+    "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable"
+  },
+  "devDependencies": {
+    "@ts-type/package-dts": "^2.0.8",
+    "@types/node": "^20.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.59.9",
+    "@typescript-eslint/parser": "^5.59.9",
+    "commander": "^10.0.1",
+    "confusing-browser-globals": "^1.0.11",
+    "eslint": "^8.42.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsonc": "^2.8.0",
+    "eslint-plugin-mocha": "^10.1.0",
+    "eslint-plugin-n": "^16.0.0",
+    "eslint-plugin-sort-keys-fix": "^1.1.2",
+    "eslint-plugin-typescript-sort-keys": "^2.3.0",
+    "husky": "^8.0.3",
+    "json-schema-to-typescript": "^13.0.1",
+    "jsonc-eslint-parser": "^2.3.0",
+    "node-color-log": "^10.0.2",
+    "pinst": "^3.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.3"
+  }
+}

@@ -50,6 +50,11 @@ const queryVersion = async (workingDir) =>
 
 const updateChangelog = async (workingDir, version) => {
   const changelogPath = pathResolve(workingDir, 'CHANGELOG.md')
+
+  if (!version) {
+    return
+  }
+
   if (!existsSync(changelogPath)) {
     console.warn('No CHANGELOG.md file found')
     return

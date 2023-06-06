@@ -17,6 +17,8 @@ jobs:
   release-package:
     name: Release package on npm
     runs-on: ubuntu-latest
+    needs:
+      - build
     if: ${{ startsWith(github.ref, 'refs/tags/v') }}
 
     steps:
@@ -32,7 +34,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ./schemas/index.d.ts
+            ./dist
           key: ${{ runner.os }}-build-${{ github.sha }}
 
       - name: Install dependencies

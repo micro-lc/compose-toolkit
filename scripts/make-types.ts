@@ -1,3 +1,4 @@
+/* eslint-disable no-sync */
 /*!
 
   Copyright 2022 Mia srl
@@ -16,9 +17,8 @@
 
 */
 
-import { existsSync, readFileSync } from 'fs'
-import { writeFile } from 'fs/promises'
-import { resolve } from 'path'
+import fs from 'fs'
+import path from 'path'
 
 import type { Options } from 'json-schema-to-typescript'
 import { compileFromFile } from 'json-schema-to-typescript'
@@ -35,10 +35,11 @@ const bannerComment = [
 ]
 
 const main = async () => {
-  const schemaDirPath = resolve(__dirname, '../schemas')
+  const schemaDirPath = path.resolve(__dirname, '../schemas')
+  const outputDir = path.resolve(__dirname, '../dist')
 
-  const inputFilePath = resolve(schemaDirPath, 'manifest.schema.json')
-  const outputFilePath = resolve(schemaDirPath, 'index.d.ts')
+  const inputFilePath = path.resolve(schemaDirPath, 'manifest.schema.json')
+  const outputFilePath = path.resolve(outputDir, 'index.d.ts')
 
   try {
     const compileProps: Partial<Options> = {
@@ -48,8 +49,8 @@ const main = async () => {
             read({ url }) {
               const fileNameMatch = url.match(/micro-lc\/compose-toolkit\/main\/schemas\/(.+)(#\/.*)?$/)
 
-              if (fileNameMatch?.[1] !== undefined && existsSync(resolve(schemaDirPath, fileNameMatch[1]))) {
-                return readFileSync(resolve(schemaDirPath, fileNameMatch[1]))
+              if (fileNameMatch?.[1] !== undefined && fs.existsSync(path.resolve(schemaDirPath, fileNameMatch[1]))) {
+                return fs.readFileSync(path.resolve(schemaDirPath, fileNameMatch[1]))
               }
 
               throw new TypeError(`Cannot find locally a file for ${url} $ref`)
@@ -64,7 +65,8 @@ const main = async () => {
 
     const compiledTypes = await compileFromFile(inputFilePath, compileProps)
 
-    await writeFile(outputFilePath, compiledTypes)
+    await fs.promises.mkdir(outputDir, { recursive: true })
+    await fs.promises.writeFile(outputFilePath, compiledTypes, { flag: 'w' })
 
     console.log('\x1b[32m%s\x1b[0m', '✔ Schema compiled successfully')
   } catch (err) {

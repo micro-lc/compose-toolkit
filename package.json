@@ -1,21 +1,19 @@
 {
   "name": "@micro-lc/compose-toolkit",
   "version": "0.0.0",
+  "types": "./dist/index.d.ts",
   "license": "SEE LICENSE IN LICENSE",
   "packageManager": "yarn@3.6.0",
   "files": [
-    "schemas",
-    "package.json"
+    "./dist",
+    "./schemas",
+    "./package.json"
   ],
-  "exports": {
-    "./schemas": {
-      "types": "./schemas/index.d.ts"
-    }
-  },
   "scripts": {
     "lint": "eslint . --ext .ts,.schema.json --resolve-plugins-relative-to .",
     "test": "echo 'TODO'",
     "build": "ts-node scripts/make-types.ts",
+    "bump": "node scripts/version.mjs",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable"

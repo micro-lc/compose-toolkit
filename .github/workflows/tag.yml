@@ -1,0 +1,42 @@
+name: Tag
+
+env:
+  NPM_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+  node-version: 18.x
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v**'
+
+jobs:
+  build:
+    uses: micro-lc/compose-toolkit/.github/workflows/build.yml@main
+
+  release-package:
+    name: Release package on npm
+    runs-on: ubuntu-latest
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+          cache: yarn
+
+      - name: Build Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./schemas/index.d.ts
+          key: ${{ runner.os }}-build-${{ github.sha }}
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Publish
+        run: yarn npm publish

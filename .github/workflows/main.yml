@@ -1,0 +1,14 @@
+name: Main
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    uses: micro-lc/compose-toolkit/.github/workflows/build.yml@main

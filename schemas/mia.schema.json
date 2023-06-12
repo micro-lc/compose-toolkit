@@ -85,7 +85,9 @@
             "color",
             "event",
             "mia/endpoints",
+            "mia/endpoints/data-source",
             "mia/endpoints/crud",
+            "mia/endpoints/data-source-and-generate-data-schema",
             "mia/endpoints/crud-and-generate-data-schema",
             "micro-lc/applications"
           ]

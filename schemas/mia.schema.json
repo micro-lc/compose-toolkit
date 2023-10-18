@@ -101,6 +101,30 @@
         "enumLabels": {
           "type": "object",
           "additionalProperties": { "$ref": "#/definitions/localized-text" }
+        },
+        "arrayVisualization": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "type": { "const": "table" },
+                "configuration": {
+                  "title": "ArrayTableConfig",
+                  "type": "object",
+                  "properties": {
+                    "columns": {
+                      "description": "Name of the items properties to visualize in the table",
+                      "type": "array",
+                      "items": { "type": "string" },
+                      "minItems": 1
+                    }
+                  },
+                  "required": ["columns"]
+                }
+              },
+              "required": ["type", "configuration"]
+            }
+          ]
         }
       },
       "additionalProperties": false

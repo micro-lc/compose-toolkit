@@ -61,6 +61,9 @@
     "description": {
       "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#/definitions/localized-text"
     },
+    "descriptionLong": {
+      "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#/definitions/localized-text"
+    },
     "definitions": {
       "type": "object",
       "default": {},

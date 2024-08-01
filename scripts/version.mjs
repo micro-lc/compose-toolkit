@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import cp from 'child_process'
 import { existsSync } from 'fs'
 import { readFile, writeFile } from 'fs/promises'

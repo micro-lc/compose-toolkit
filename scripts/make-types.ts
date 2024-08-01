@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-sync */
 /*!
 
@@ -47,7 +48,7 @@ const main = async () => {
       $refOptions: {
         resolve: {
           http: {
-            read({ url }) {
+            read({ url }: {url: string}) {
               const fileNameMatch = url.match(/micro-lc\/compose-toolkit\/main\/schemas\/(.+)(#\/.*)?$/)
 
               if (fileNameMatch?.[1] !== undefined && fs.existsSync(path.resolve(schemaDirPath, fileNameMatch[1]))) {
@@ -71,8 +72,9 @@ const main = async () => {
 
     const indextds = [
       finalBanner,
-      'export type * from \'./manifest\'',
       'export type * from \'./component\'',
+      'export type * from \'./library\'',
+      'export type * from \'./manifest\'',
     ].join('\n')
     await fs.promises.writeFile(path.resolve(outputDir, 'index.d.ts'), indextds, { flag: 'w' })
 

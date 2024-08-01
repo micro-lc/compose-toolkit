@@ -1,6 +1,6 @@
 {
   "name": "@micro-lc/compose-toolkit",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "types": "./dist/types/index.d.ts",
   "license": "SEE LICENSE IN LICENSE",
   "packageManager": "yarn@4.3.1",

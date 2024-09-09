@@ -26,7 +26,7 @@
     "@types/node": "^22.5.2",
     "commander": "^12.1.0",
     "confusing-browser-globals": "^1.0.11",
-    "eslint": "^9.8.0",
+    "eslint": "^9.10.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^17.10.2",

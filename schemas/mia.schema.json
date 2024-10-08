@@ -92,6 +92,13 @@
             "micro-lc/applications"
           ]
         },
+        "group": {
+          "enum": [
+            "appearance",
+            "content",
+            "interaction"
+          ]
+        },
         "shared-key": {
           "anyOf": [
             { "type": "string", "enum": ["back-kit/data-schema"] },

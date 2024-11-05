@@ -56,26 +56,42 @@
   "type": "object",
   "properties": {
     "label": {
+      "description": "Human-readable name of the component",
       "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#/definitions/localized-text"
     },
     "description": {
+      "description": "Short description of the component",
       "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#/definitions/localized-text"
     },
     "descriptionLong": {
+      "description": "Long description of the component, usually in Markdown syntax",
       "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#/definitions/localized-text"
     },
-    "definitions": {
-      "type": "object",
-      "default": {},
-      "additionalProperties": {
-        "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#"
-      }
+    "docLink": { 
+      "description": "Link to the component documentation",
+      "type": "string"
     },
-    "docLink": { "type": "string" },
     "type": {
+      "description": "Type of the component",
+      "type": "string",
       "enum": ["layout", "connector", "adapter"]
     },
+    "example": {
+      "description": "Example of component usage",
+      "type": "string"
+    },
+    "iconSrc": {
+      "description": "URL (with origin) of an icon describing the component",
+      "type": "string",
+      "format": "uri"
+    },
+    "previewImage": {
+      "description": "URL (with origin) of a preview image of the component",
+      "type": "string",
+      "format": "uri"
+    },
     "mocks": {
+      "description": "Common browser APIs mock definitions",
       "type": "object",
       "properties": {
         "fetch": {
@@ -89,7 +105,16 @@
         }
       }
     },
+    "definitions": {
+      "description": "Utilities that can be referenced with $ref syntax in properties definitions",
+      "type": "object",
+      "default": {},
+      "additionalProperties": {
+        "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#"
+      }
+    },
     "properties": {
+      "description": "Components properties/attributes definitions",
       "type": "object",
       "additionalProperties": {
         "$ref": "https://raw.githubusercontent.com/micro-lc/compose-toolkit/main/schemas/mia.schema.json#"

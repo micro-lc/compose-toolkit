@@ -10,6 +10,9 @@
     "package.json",
     "LICENSE"
   ],
+  "repository": {
+    "url": "git+https://github.com/micro-lc/compose-toolkit.git"
+  },
   "scripts": {
     "lint": "eslint .",
     "test": "echo 'TODO'",
